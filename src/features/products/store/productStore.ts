@@ -16,11 +16,11 @@ type ProductState = {
 };
 
 const validateProduct = (input: CreateProductInput): string | null => {
-  if (!input.name.trim()) return "Nama product tidak boleh kosong";
-  if (input.name.length > 100) return "Nama maksimal 100 karakter";
-  if (input.price < 0) return "Harga tidak boleh negatif";
-  if (input.stock < 0) return "Stok tidak boleh negatif";
-  if (!Number.isInteger(input.stock)) return "Stok harus bilangan bulat";
+  if (!input.name.trim()) return "Product name cannot be empty";
+  if (input.name.length > 100) return "Name must be 100 characters or fewer";
+  if (input.price < 0) return "Price cannot be negative";
+  if (input.stock < 0) return "Stock cannot be negative";
+  if (!Number.isInteger(input.stock)) return "Stock must be a whole number";
   return null;
 };
 
@@ -62,7 +62,7 @@ export const useProductStore = create<ProductState>()(
           const existing = get().products.find((p) => p.id === id);
           if (!existing) {
             set(
-              { error: "Product tidak ditemukan" },
+              { error: "Product not found" },
               false,
               "products/update/notfound",
             );
@@ -101,7 +101,7 @@ export const useProductStore = create<ProductState>()(
           const exists = get().products.some((p) => p.id === id);
           if (!exists) {
             set(
-              { error: "Product tidak ditemukan" },
+              { error: "Product not found" },
               false,
               "products/delete/notfound",
             );

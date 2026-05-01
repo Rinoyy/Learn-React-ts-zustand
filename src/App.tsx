@@ -19,11 +19,11 @@ function App() {
       <main className="max-w-5xl mx-auto px-6 py-8 space-y-6">
         <ErrorBanner />
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Tambah Product</h2>
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Add Product</h2>
           <ProductForm />
         </div>
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Daftar Product</h2>
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Product List</h2>
           <ProductList />
         </div>
       </main>

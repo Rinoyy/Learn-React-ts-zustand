@@ -24,7 +24,7 @@ export function ProductRow({ product }: Props) {
   };
 
   const handleDelete = () => {
-    if (!confirm(`Yakin hapus "${product.name}"?`)) return;
+    if (!confirm(`Are you sure you want to delete "${product.name}"?`)) return;
     deleteProduct(product.id);
   };
 
@@ -48,13 +48,13 @@ export function ProductRow({ product }: Props) {
               onClick={handleSave}
               className="rounded-md bg-indigo-600 px-3 py-1 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors cursor-pointer"
             >
-              Simpan
+              Save
             </button>
             <button
               onClick={handleCancel}
               className="rounded-md bg-white border border-gray-300 px-3 py-1 text-xs font-semibold text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
             >
-              Batal
+              Cancel
             </button>
           </div>
         </td>
@@ -83,7 +83,7 @@ export function ProductRow({ product }: Props) {
             onClick={handleDelete}
             className="rounded-md border border-red-200 px-3 py-1 text-xs font-medium text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
           >
-            Hapus
+            Delete
           </button>
         </div>
       </td>

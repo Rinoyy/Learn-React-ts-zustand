@@ -2,15 +2,17 @@
 
 ![Product Manager App](./src/assets/demo.png)
 
-Project ini gue buat buat belajar **Zustand** — state management buat React yang jauh lebih simpel dibanding Redux. Daripada cuma baca docs, gue langsung bikin sesuatu yang nyata: CRUD product sederhana.
+**Live demo:** https://learn-react-ts-zustand.vercel.app/
 
-## Apa yang dibahas di sini
+I built this project to learn **Zustand** — a state management library for React that is far simpler than Redux. Instead of just reading the docs, I built something real: a simple product CRUD app.
 
-- Cara bikin store Zustand yang proper, bukan asal `create()` terus selesai
-- Kenapa selector itu penting (biar komponen nggak re-render sia-sia)
-- Pakai `persist` biar data nggak ilang waktu refresh
-- Pakai `devtools` biar bisa debug state di browser
-- Struktur folder yang masuk akal untuk feature-based architecture
+## What's covered here
+
+- How to build a proper Zustand store, not just slapping `create()` and calling it done
+- Why selectors matter (to prevent unnecessary component re-renders)
+- Using `persist` so data survives a page refresh
+- Using `devtools` to debug state in the browser
+- A sensible folder structure for feature-based architecture
 
 ## Tech stack
 
@@ -20,10 +22,10 @@ Project ini gue buat buat belajar **Zustand** — state management buat React ya
 | **Zustand 5** | State management |
 | **React Router 7** | Routing |
 | **Tailwind CSS 4** | Styling |
-| **TypeScript** | Biar nggak salah ketik nama field |
+| **TypeScript** | To avoid mistyping field names |
 | **Vite** | Dev server & bundler |
 
-## Struktur project
+## Project structure
 
 ```
 src/
@@ -31,41 +33,41 @@ src/
 │   └── products/
 │       ├── components/     # UI: form, list, row, error banner
 │       ├── store/
-│       │   ├── productStore.ts      # Store utama + actions
-│       │   └── productSelectors.ts  # Custom hooks per kebutuhan
+│       │   ├── productStore.ts      # Main store + actions
+│       │   └── productSelectors.ts  # Custom hooks per use case
 │       ├── types.ts        # Type definitions
-│       └── utils.ts        # Helper kecil (generate ID, dll)
+│       └── utils.ts        # Small helpers (generate ID, etc.)
 ├── router/
-│   └── index.tsx           # Definisi routes
+│   └── index.tsx           # Route definitions
 └── main.tsx
 ```
 
-Kenapa dipisah antara store dan selector? Biar komponen tinggal `useProducts()` atau `useTotalValue()` — nggak perlu tahu cara ngambilnya dari mana. Kalau struktur store berubah, yang diubah cuma selector, bukan semua komponen.
+Why separate store and selectors? So components just call `useProducts()` or `useTotalValue()` — they don't need to know how to read from the store. If the store structure changes, only the selectors need updating, not every component.
 
-## Cara jalanin
+## How to run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Buka `http://localhost:5173`, langsung bisa tambah, edit, hapus product. Data tersimpan di localStorage jadi nggak hilang walau di-refresh.
+Open `http://localhost:5173` and you can immediately add, edit, and delete products. Data is saved in localStorage so it persists across refreshes.
 
-## Yang menarik dari Zustand
+## What's interesting about Zustand
 
-Bandingkan ini:
+Compare this:
 
 ```ts
-// Redux — banyak boilerplate
+// Redux — lots of boilerplate
 dispatch(setProducts(data))
 dispatch(setError(null))
 dispatch(setLoading(false))
 
-// Zustand — langsung aja
+// Zustand — just do it
 set({ products: data, error: null, loading: false })
 ```
 
-Gue juga pakai `useShallow` buat selector yang return object, biar nggak trigger re-render tiap kali state lain berubah:
+I also use `useShallow` for selectors that return objects, so they don't trigger re-renders every time unrelated state changes:
 
 ```ts
 export const useProductActions = () =>
@@ -78,12 +80,12 @@ export const useProductActions = () =>
   );
 ```
 
-## Fitur aplikasi
+## App features
 
-- Tambah product (nama, harga, stok)
-- Edit inline langsung di row tabel
-- Hapus dengan konfirmasi
-- Validasi input (nama kosong, harga/stok negatif, stok harus integer)
-- Badge warna stok: merah kalau habis, kuning kalau hampir habis, hijau kalau aman
-- Summary stats: total product, total stok, total value
-- Data persist di localStorage
+- Add a product (name, price, stock)
+- Inline editing directly in the table row
+- Delete with confirmation
+- Input validation (empty name, negative price/stock, stock must be an integer)
+- Color-coded stock badge: red if out of stock, yellow if low, green if healthy
+- Summary stats: total products, total stock, total value
+- Data persisted in localStorage
